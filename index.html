@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+	<!-- Magnific Popup core CSS file -->
+<link rel="stylesheet" href="https://influitive-theme.azureedge.net/core/css/magnific-popup.min.css">
+<script type="text/javascript" src="https://play.vidyard.com/v0/api.js"></script>
+</head>
+
+<body>
+	<a class="vidyard-lb" data-video-id="4CXA2L2GivrgQQ1256GCqu" href="#">This is a link</a>
+
+<div class="vidyard-lb-wrapper mfp-hide" id="vidyard-lb-4CXA2L2GivrgQQ1256GCqu">
+	<div class="video-wrapper primary-video active-vidyard">
+		<script type="text/javascript" id="vidyard_embed_code_bLvsZbLsh8HrAQdyfZqVSo" src="https://play.vidyard.com/4CXA2L2GivrgQQ1256GCqu.js?v=3.1.1&type=inline"></script>
+	</div>
+	<button class="vidyard-cta-button">This is a button</button>
+</div>
+
+<!--<script type="text/javascript" id="vidyard_embed_code_4CXA2L2GivrgQQ1256GCqu" src="//play.vidyard.com/4CXA2L2GivrgQQ1256GCqu.js?v=3.1.1&type=inline"></script>-->
+
+<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!-- Magnific Popup core JS file -->
+<script src="https://influitive-theme.azureedge.net/core/js/jquery.magnific-popup.min.js"></script>
+
+<script type="text/javascript">
+	//vidyard_video: function(){
+		jQuery(document).on("click",".vidyard-lb",function(e){
+			var video_id = jQuery(this).attr("data-video-id");
+			var videos = new Vidyard.players();
+			var video_player = videos[video_id];
+			var video_wrapper = "#vidyard-lb-" + video_id;
+			jQuery.magnificPopup.open({
+				items: {
+					src: video_wrapper,
+					type: "inline"
+				},
+				closeBtnInside: true,
+				showCloseBtn: true,
+				closeMarkup: '<a title="%title%" class="mfp-close">&#215;</a>',
+				mainClass: 'mfp-vidyard',
+				callbacks: {
+					open: function() {
+						setTimeout(function(){
+							video_player.playChapter(0);
+						},500);
+						jQuery(document).on("click", video_wrapper + " .vidyard-cta-button", function(e){
+							e.preventDefault();
+							jQuery.magnificPopup.close();
+							document.location = jQuery(this).attr("href");
+						});
+					}
+				}
+			});
+			e.preventDefault();
+		});
+	//}
+</script>
+</body>
+</html>
